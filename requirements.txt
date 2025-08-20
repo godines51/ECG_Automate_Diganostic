@@ -1,0 +1,10 @@
+Flask==3.0.0
+gunicorn==21.2.0
+Pillow==10.3.0
+requests==2.32.3
+gdown==5.2.0
+
+# forçar wheels de CPU (evita CUDA e reduz dor de cabeça no Render)
+torch==2.4.0+cpu
+torchvision==0.19.0+cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
