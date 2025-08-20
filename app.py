@@ -7,6 +7,8 @@
 
 from __future__ import annotations
 
+import gdown
+
 import logging
 from pathlib import Path
 from typing import List, Dict
@@ -222,4 +224,5 @@ def predict_route():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
+
 
