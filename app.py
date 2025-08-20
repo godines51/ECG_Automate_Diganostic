@@ -11,6 +11,9 @@ import logging
 from pathlib import Path
 from typing import List, Dict
 
+from pathlib import Path
+import requests
+
 from flask import Flask, jsonify, render_template_string, request
 from PIL import Image
 import torch
@@ -24,6 +27,16 @@ import torchvision.transforms as T
 MODEL_PATH: Path = Path("ecg_classifier.pth")
 DEVICE      = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 MAX_FILE_MB = 5
+
+MODEL_PATH = Path("ecg_classifier.pth")
+FILE_ID = "1DtRXlB0NQHom05rWrCxTXVbkKatdC6qe"  # só o ID, exemplo: 1DxR...C5qe
+
+if not MODEL_PATH.exists():
+    print("Baixando modelo do Google Drive...")
+    url = f"https://drive.google.com/uc?id={FILE_ID}"
+    gdown.download(url, str(MODEL_PATH), quiet=False)
+    print("Modelo baixado com sucesso!")
+    
 
 # Rótulos traduzidos ----------------------------------------------------------
 LABELS_PT = {
@@ -209,3 +222,4 @@ def predict_route():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
+
